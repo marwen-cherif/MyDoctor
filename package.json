@@ -1,13 +1,12 @@
 {
   "name": "mydoctor",
   "private": true,
+  "author": "Marwen Cherif <marwen.cherif@gmail.com>",
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {
-    "prettier": "^2.6.0"
-  },
   "devDependencies": {
+    "prettier": "^2.6.0",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
     "eslint": "^8.11.0",
