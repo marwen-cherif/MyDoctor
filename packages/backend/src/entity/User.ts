@@ -12,8 +12,8 @@ import { Appointment } from './Appointment';
 
 @Entity()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ unique: true })
   email: string;
@@ -30,9 +30,9 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   phone: string;
 
-  @ManyToMany(() => Role)
+  @ManyToMany(() => Role, { eager: true })
   @JoinTable()
-  categories: Role[];
+  roles: Role[];
 
   @OneToMany(() => Appointment, (appointment) => appointment.client)
   clientAppointments: Promise<Appointment[]>;

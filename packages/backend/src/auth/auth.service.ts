@@ -2,6 +2,7 @@ import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 import { UserService } from '../user/user.service';
+import { JwtPayload } from './jwt.payload';
 
 @Injectable()
 export class AuthService {
@@ -12,23 +13,30 @@ export class AuthService {
 
   private readonly logger = new Logger(AuthService.name);
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.userService.findOne(username);
+  async validateUser(payload: JwtPayload) {
+    const user = await this.userService.findOne(payload.email);
 
     // const hashKey = hashSync('test', 10);
-    this.logger.verbose(pass, user.password);
+    this.logger.verbose(JSON.stringify(payload));
 
-    if (user && compareSync(pass, user.password)) {
+    if (user && compareSync(payload.password, user.password)) {
       const { password, ...result } = user;
+
       return result;
     }
     return null;
   }
 
-  async login(user: any) {
-    const payload = { email: user.email, sub: user.id };
-
-    const result = await this.validateUser(user.email, user.password);
+  async login(user: { email: string; password: string }): Promise<any> {
+    const result = await this.validateUser({
+      email: user.email,
+      password: user.password,
+    });
+    const payload = {
+      email: user.email,
+      password: user.password,
+      userId: result.id,
+    };
 
     if (result) {
       return {

@@ -5,32 +5,41 @@ import {
   ManyToOne,
   OneToMany,
   BaseEntity,
+  JoinColumn,
 } from 'typeorm';
 import { User } from './User';
 import { Reminder } from './Reminder';
 
 @Entity()
 export class Appointment extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column()
+  @Column({ nullable: false })
   startAt: Date;
 
-  @Column()
+  @Column({ nullable: false })
   endAt: Date;
 
-  @Column()
+  @Column({ nullable: false })
   createdAt: Date;
 
-  @Column()
+  @Column({ nullable: true })
   lastModifiedAt: Date;
 
-  @ManyToOne(() => User, (user) => user.clientAppointments)
-  client: Promise<User>;
+  @ManyToOne(() => User, (user) => user.clientAppointments, {
+    nullable: false,
+    cascade: true,
+  })
+  @JoinColumn()
+  client: User;
 
-  @ManyToOne(() => User, (user) => user.clientAppointments)
-  doctor: Promise<User>;
+  @ManyToOne(() => User, (user) => user.clientAppointments, {
+    nullable: false,
+    cascade: true,
+  })
+  @JoinColumn()
+  doctor: User;
 
   @OneToMany(() => Reminder, (reminder: Reminder) => reminder.appointment)
   reminders: Promise<Reminder[]>;

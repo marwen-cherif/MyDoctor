@@ -14,8 +14,8 @@ export enum ReminderType {
 
 @Entity()
 export class Reminder extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   date: Date;

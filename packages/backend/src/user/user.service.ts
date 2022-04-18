@@ -6,4 +6,7 @@ export class UserService {
   async findOne(email: string): Promise<User | undefined> {
     return User.findOneBy({ email });
   }
+  async findOneById(userId: string): Promise<User | undefined> {
+    return User.findOne({ relations: ['roles'], where: { id: userId } });
+  }
 }
