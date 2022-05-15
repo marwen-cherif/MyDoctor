@@ -1,5 +1,5 @@
 import { Controller, Get, Query, Body, Request, Post } from '@nestjs/common';
-import { parse } from 'date-fns';
+import { parse, parseISO } from 'date-fns';
 
 import { AppointmentService } from './appointment.service';
 import { Roles } from '../auth/roles.decorator';
@@ -10,12 +10,22 @@ export class AppointmentController {
   constructor(private readonly appointmentService: AppointmentService) {}
 
   @Get('all')
-  getAppointments(@Query() query: Record<string, any>) {
-    return this.appointmentService.getAppointments(
-      query.doctorId,
-      query.startAt,
-      query.endAt,
-    );
+  getAppointments(
+    @Query() query: { doctorId: string; startAt?: string; endAt?: string },
+  ) {
+    const filters: { doctorId: string; startAt?: Date; endAt?: Date } = {
+      doctorId: query.doctorId,
+    };
+
+    if (query.startAt) {
+      filters.startAt = parseISO(query.startAt);
+    }
+
+    if (query.endAt) {
+      filters.endAt = parseISO(query.endAt);
+    }
+
+    return this.appointmentService.getAppointments(filters);
   }
 
   @Post('create')

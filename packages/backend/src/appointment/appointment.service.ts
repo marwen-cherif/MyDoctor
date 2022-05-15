@@ -33,28 +33,33 @@ export class AppointmentService {
 
   private readonly logger = new Logger(AppointmentService.name);
 
-  async getAppointments(
-    doctorId: string,
-    startAt?: Date,
-    endAt?: Date,
-  ): Promise<Appointment[] | undefined> {
-    const builder = Appointment.createQueryBuilder()
-      .select()
-      .andWhere('appointment.doctorId = :doctorId', { doctorId });
+  async getAppointments({
+    doctorId,
+    startAt,
+    endAt,
+  }: {
+    doctorId: string;
+    startAt?: Date;
+    endAt?: Date;
+  }): Promise<Appointment[] | undefined> {
+    const builder = Appointment.createQueryBuilder('appointment').where(
+      'appointment.doctorId = :doctorId',
+      { doctorId },
+    );
 
     if (startAt) {
       builder.andWhere('appointment.startAt >= :startAt', {
-        startAt: startAt,
+        startAt: startAt.toISOString(),
       });
     }
 
     if (endAt) {
-      builder.andWhere('appointment.endAt <= :endAt', {
-        endAt: endAt,
+      builder.andWhere('appointment.endAt < :endAt', {
+        endAt: endAt.toISOString(),
       });
     }
 
-    return builder.getMany();
+    return await builder.getMany();
   }
 
   async createAppointment({
