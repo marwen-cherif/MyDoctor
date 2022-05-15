@@ -5,6 +5,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "bootstrap": "npx lerna bootstrap"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
