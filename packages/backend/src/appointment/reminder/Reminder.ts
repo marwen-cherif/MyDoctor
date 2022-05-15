@@ -5,7 +5,7 @@ import {
   ManyToOne,
   BaseEntity,
 } from 'typeorm';
-import { Appointment } from './Appointment';
+import { Appointment } from '../Appointment';
 
 export enum ReminderType {
   Sms = 'Sms',
@@ -27,5 +27,5 @@ export class Reminder extends BaseEntity {
     () => Appointment,
     (appointment: Appointment) => appointment.reminders,
   )
-  appointment: Promise<Appointment>;
+  appointment: Appointment;
 }

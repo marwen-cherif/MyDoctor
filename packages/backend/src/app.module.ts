@@ -14,6 +14,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { AppointmentModule } from './appointment/appointment.module';
 import { RolesGuard } from './auth/roles.guard';
+import { ReminderService } from './appointment/reminder/reminder.service';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { RolesGuard } from './auth/roles.guard';
     AppService,
     AppointmentService,
     UserService,
+    ReminderService,
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

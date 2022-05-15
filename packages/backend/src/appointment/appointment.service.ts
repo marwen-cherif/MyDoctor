@@ -1,8 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Appointment } from '../entity/Appointment';
+import { Appointment } from './Appointment';
 
 import { UserService } from '../user/user.service';
-import { User } from '../entity/User';
+import { User } from '../user/User';
+import { ReminderService } from './reminder/reminder.service';
+import { ReminderType } from './reminder/Reminder';
 
 export interface CreateAppointmentProjection {
   id: string;
@@ -24,7 +26,10 @@ export interface CreateAppointmentProjection {
 
 @Injectable()
 export class AppointmentService {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private reminderService: ReminderService,
+  ) {}
 
   private readonly logger = new Logger(AppointmentService.name);
 
@@ -71,6 +76,12 @@ export class AppointmentService {
     appointment.createdAt = new Date();
 
     const newAppointment = await appointment.save();
+
+    await this.reminderService.createReminder({
+      date: newAppointment.startAt,
+      reminderType: ReminderType.Sms,
+      appointment: newAppointment,
+    });
 
     return {
       id: newAppointment.id,

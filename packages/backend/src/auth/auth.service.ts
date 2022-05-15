@@ -17,7 +17,6 @@ export class AuthService {
     const user = await this.userService.findOne(payload.email);
 
     // const hashKey = hashSync('test', 10);
-    this.logger.verbose(JSON.stringify(payload));
 
     if (user && compareSync(payload.password, user.password)) {
       const { password, ...result } = user;

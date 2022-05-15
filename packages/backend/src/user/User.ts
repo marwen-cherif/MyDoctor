@@ -8,7 +8,7 @@ import {
   BaseEntity,
 } from 'typeorm';
 import { Role } from './Role';
-import { Appointment } from './Appointment';
+import { Appointment } from '../appointment/Appointment';
 
 @Entity()
 export class User extends BaseEntity {
