@@ -13,7 +13,8 @@ export class AppointmentController {
   getAppointments(@Query() query: Record<string, any>) {
     return this.appointmentService.getAppointments(
       query.doctorId,
-      query.filters,
+      query.startAt,
+      query.endAt,
     );
   }
 

@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Appointment } from '../entity/Appointment';
-import { Raw } from 'typeorm';
 
 import { UserService } from '../user/user.service';
 import { User } from '../entity/User';
@@ -31,26 +30,26 @@ export class AppointmentService {
 
   async getAppointments(
     doctorId: string,
-    filters: {
-      startAt: Date;
-      endAt: Date;
-    },
+    startAt?: Date,
+    endAt?: Date,
   ): Promise<Appointment[] | undefined> {
-    if (filters && filters.startAt && filters.endAt) {
-      return Appointment.find({
-        where: {
-          doctor: { id: doctorId },
-          startAt: Raw((alias) => `${alias} > :date`, {
-            date: filters.startAt,
-          }),
-          endAt: Raw((alias) => `${alias} > :date`, {
-            date: filters.endAt,
-          }),
-        },
+    const builder = Appointment.createQueryBuilder()
+      .select()
+      .andWhere('appointment.doctorId = :doctorId', { doctorId });
+
+    if (startAt) {
+      builder.andWhere('appointment.startAt >= :startAt', {
+        startAt: startAt,
       });
     }
 
-    return Appointment.find({ where: { doctor: { id: doctorId } } });
+    if (endAt) {
+      builder.andWhere('appointment.endAt <= :endAt', {
+        endAt: endAt,
+      });
+    }
+
+    return builder.getMany();
   }
 
   async createAppointment({

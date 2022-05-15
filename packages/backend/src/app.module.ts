@@ -17,7 +17,9 @@ import { RolesGuard } from './auth/roles.guard';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: ['.env.production', '.env.development.local', '.env'],
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -27,6 +29,7 @@ import { RolesGuard } from './auth/roles.guard';
       database: process.env.DB_DATABASE,
       entities: [__dirname + '/**/*{.ts,.js}'],
       synchronize: process.env.ENV === 'localhost',
+      timezone: process.env.TZ,
     }),
     AuthModule,
     UserModule,
