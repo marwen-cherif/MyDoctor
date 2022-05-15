@@ -1,11 +1,11 @@
 {
   "name": "@mydoctor/frontend",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "author": "Marwen Cherif <marwen.cherif@gmail.com>",
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "@mydoctor/common": "0.0.1",
+    "@mydoctor/common": "^0.0.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
