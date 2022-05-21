@@ -12,8 +12,20 @@ export enum ReminderType {
   Email = 'Email',
 }
 
+export enum ReminderStatus {
+  Created = 'Created',
+  Sent = 'Sent',
+  Failure = 'Failure',
+}
+
 @Entity()
 export class Reminder extends BaseEntity {
+  constructor() {
+    super();
+
+    this.status = ReminderStatus.Created;
+  }
+
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -22,6 +34,9 @@ export class Reminder extends BaseEntity {
 
   @Column()
   type: ReminderType;
+
+  @Column()
+  status: ReminderStatus;
 
   @ManyToOne(
     () => Appointment,

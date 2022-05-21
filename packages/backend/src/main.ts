@@ -8,6 +8,11 @@ async function bootstrap() {
         ? ['log', 'debug', 'error', 'verbose', 'warn']
         : ['error', 'warn'],
   });
+
+  app.enableCors({
+    origin: 'http://localhost:3000',
+  });
+
   await app.listen(3000);
 }
 

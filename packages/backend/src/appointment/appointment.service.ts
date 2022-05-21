@@ -5,6 +5,7 @@ import { UserService } from '../user/user.service';
 import { User } from '../user/User';
 import { ReminderService } from './reminder/reminder.service';
 import { ReminderType } from './reminder/Reminder';
+import { sub } from 'date-fns';
 
 export interface CreateAppointmentProjection {
   id: string;
@@ -83,7 +84,7 @@ export class AppointmentService {
     const newAppointment = await appointment.save();
 
     await this.reminderService.createReminder({
-      date: newAppointment.startAt,
+      date: sub(newAppointment.startAt, { days: 1 }),
       reminderType: ReminderType.Sms,
       appointment: newAppointment,
     });
