@@ -116,7 +116,6 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       rules: {
-        'react/display-name': 'error',
         'react/prop-types': 'off',
         'no-mixed-operators': 'off',
         'no-angle-bracket': 'off',
