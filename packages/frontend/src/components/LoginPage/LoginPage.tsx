@@ -2,7 +2,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   Avatar,
   Box,
-  Button,
   Checkbox,
   Container,
   CssBaseline,
@@ -12,21 +11,18 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { FunctionComponent } from 'react';
 
 import { useLoginPage } from './LoginPage.hooks';
 
-export const LoginPage: FunctionComponent<React.PropsWithChildren<unknown>> = ({
-  children,
-}) => {
+const LoginPage: FunctionComponent = () => {
   const { formContext, handleLogin } = useLoginPage();
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = formContext;
-
-  console.log(errors);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -76,17 +72,26 @@ export const LoginPage: FunctionComponent<React.PropsWithChildren<unknown>> = ({
             helperText={errors.password ? errors.password.message : undefined}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={
+              <Checkbox
+                value={true}
+                color="primary"
+                {...register('rememberMe')}
+              />
+            }
             label="Remember me"
           />
-          <Button
+
+          <LoadingButton
             type="submit"
+            loading={isSubmitting}
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
             Sign In
-          </Button>
+          </LoadingButton>
+
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -104,3 +109,7 @@ export const LoginPage: FunctionComponent<React.PropsWithChildren<unknown>> = ({
     </Container>
   );
 };
+
+LoginPage.displayName = 'LoginPage';
+
+export default LoginPage;

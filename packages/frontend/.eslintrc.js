@@ -2,12 +2,9 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
     'plugin:import/recommended',
-    'airbnb',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
-    'prettier/babel',
-    'prettier/react',
   ],
   plugins: [
     'react',
@@ -16,8 +13,6 @@ module.exports = {
     'prettier',
     'react-hooks',
     '@typescript-eslint',
-    'styled-components-varname',
-    'no-only-tests',
   ],
   env: {
     browser: true,
@@ -33,12 +28,9 @@ module.exports = {
       },
     },
     react: {
-      version: '17.0.1',
+      version: '18.1.0',
     },
-    'import/core-modules': [
-      'redux-saga/effects',
-      'react-transition-group/Transition',
-    ],
+    'import/core-modules': ['react-transition-group/Transition'],
   },
   rules: {
     'import/order': 'off',
@@ -59,7 +51,6 @@ module.exports = {
     'react/forbid-prop-types': 'warn',
     'jsx-a11y/label-has-associated-control': 'error',
     'no-fallthrough': 'error',
-    'no-only-tests/no-only-tests': 'error',
     'max-len': [
       'error',
       {
@@ -100,17 +91,6 @@ module.exports = {
         blankLine: 'any',
         prev: ['const', 'let', 'var'],
         next: ['const', 'let', 'var'],
-      },
-    ],
-    'styled-components-varname/varname': [
-      'warn',
-      {
-        tagStyle: {
-          prefix: '$',
-        },
-        extendedStyle: {
-          prefix: '$',
-        },
       },
     ],
     'react/jsx-pascal-case': 'off',

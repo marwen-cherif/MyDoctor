@@ -68,7 +68,7 @@ export class ReminderService {
       .getMany();
   }
 
-  @Cron(CronExpression.EVERY_10_SECONDS, {
+  @Cron(CronExpression.EVERY_10_MINUTES, {
     name: 'reminder-cron',
   })
   async triggerReminder() {

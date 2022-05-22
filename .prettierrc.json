@@ -1,9 +1,0 @@
-{
-  "trailingComma": "all",
-  "printWidth": 80,
-  "singleQuote": true,
-  "importOrder": ["(@mydoctor.*)(/){0,1}.*", "^../.*", "^./.*" ],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true,
-  "importOrderCaseInsensitive": true
-}

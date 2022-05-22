@@ -1,13 +1,12 @@
 import { createTheme, ThemeProvider } from '@mui/material';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import './App.css';
-import { AppointmentPage } from './components/AppointmentPage/AppointmentPage';
-import { LoginPage } from './components/LoginPage/LoginPage';
-import { PrivateRoute } from './components/PrivateRoute';
+import AppointmentPage from './components/AppointmentPage/AppointmentPage';
+import LoginPage from './components/LoginPage/LoginPage';
+import PrivateRoute from './components/PrivateRoute';
 
-function App() {
+const App: FunctionComponent = () => {
   const theme = createTheme();
 
   return (
@@ -34,6 +33,8 @@ function App() {
       </Routes>
     </ThemeProvider>
   );
-}
+};
+
+App.displayName = 'App';
 
 export default App;

@@ -17,7 +17,11 @@ export const useLoginPage = () => {
 
   const handleLogin = useCallback(
     async (data: LoginFormValues) => {
-      await AuthenticationService.login(data);
+      await AuthenticationService.login({
+        email: data.email,
+        password: data.password,
+        rememberMe: Boolean(data.rememberMe),
+      });
 
       navigate('/');
     },

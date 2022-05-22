@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
 
-export const AppointmentPage: FunctionComponent<
+const AppointmentPage: FunctionComponent<
   React.PropsWithChildren<unknown>
-> = ({ children }) => {
-  return <></>;
-};
+> = () => <>test</>;
+
+AppointmentPage.displayName = 'AppointmentPage';
+
+export default AppointmentPage;

@@ -1,15 +1,13 @@
-import axios from 'axios';
-
-import authHeader from './auth-header';
+import axiosApiInstance from './axiosApiInstance';
 
 const API_URL = `${process.env.REACT_APP_BACK_END_BASE_URL}/appointments`;
 
 class AppointmentService {
   getAllAppointments() {
-    return axios.get(`${API_URL}/all`);
+    return axiosApiInstance.get(`${API_URL}/all`);
   }
   createNewAppointment() {
-    return axios.get(`${API_URL}/create`, { headers: authHeader() });
+    return axiosApiInstance.get(`${API_URL}/create`);
   }
 }
 export default new AppointmentService();
