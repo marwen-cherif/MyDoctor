@@ -1,27 +1,38 @@
+import { createTheme, ThemeProvider } from '@mui/material';
 import React from 'react';
-import Text from '@mydoctor/common/components/Text';
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
+
 import './App.css';
+import { AppointmentPage } from './components/AppointmentPage/AppointmentPage';
+import { LoginPage } from './components/LoginPage/LoginPage';
+import { PrivateRoute } from './components/PrivateRoute';
 
 function App() {
+  const theme = createTheme();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Text>Common Component package</Text>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <AppointmentPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PrivateRoute>
+              <AppointmentPage />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </ThemeProvider>
   );
 }
 
