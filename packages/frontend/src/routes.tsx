@@ -1,10 +1,10 @@
 import { Navigate, useRoutes } from 'react-router-dom';
-import DashboardLayout from './layouts/dashboard';
+import { DashboardLayout } from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import NotFound from './pages/NotFoundPage';
 import AuthenticationService from './services/authentication.service';
-import LoginPage from './components/LoginPage/LoginPage';
-import AppointmentPage from './components/AppointmentPage/AppointmentPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import AppointmentPage from './pages/AppointmentPage/AppointmentPage';
 
 export const RoutesConfig = {
   Login: 'login',
@@ -38,10 +38,14 @@ const Router = () => {
               element: (
                 <Navigate
                   to={`/${RoutesConfig.App}/${RoutesConfig.Appointment}`}
+                  replace
                 />
               ),
             },
-            { path: '*', element: <Navigate to={RoutesConfig.NotFound} /> },
+            {
+              path: '*',
+              element: <Navigate to={RoutesConfig.NotFound} replace />,
+            },
           ],
         },
         { path: '*', element: <Navigate to={RoutesConfig.NotFound} replace /> },

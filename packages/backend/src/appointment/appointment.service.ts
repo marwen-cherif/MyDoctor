@@ -1,10 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Appointment } from './Appointment';
+import { Appointment } from './Appointment.entity';
 
 import { UserService } from '../user/user.service';
-import { User } from '../user/User';
+import { User } from '../user/User.entity';
 import { ReminderService } from './reminder/reminder.service';
-import { ReminderType } from './reminder/Reminder';
+import { ReminderType } from './reminder/Reminder.entity';
 import { sub } from 'date-fns';
 
 export interface CreateAppointmentProjection {

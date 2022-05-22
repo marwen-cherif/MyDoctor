@@ -5,7 +5,7 @@ import {
   ManyToOne,
   BaseEntity,
 } from 'typeorm';
-import { Appointment } from '../Appointment';
+import { Appointment } from '../Appointment.entity';
 
 export enum ReminderType {
   Sms = 'Sms',

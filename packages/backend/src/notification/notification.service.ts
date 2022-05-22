@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { lastValueFrom, take } from 'rxjs';
+import { lastValueFrom, Observable, take } from 'rxjs';
 import { stringify } from 'qs';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class NotificationService {
     from: string;
     to: string;
     message: string;
-  }) {
+  }): Promise<Observable<unknown>> {
     const source$ = this.httpService
       .post<{
         token_type: string;
@@ -40,11 +40,7 @@ export class NotificationService {
     const accessToken = response.data?.access_token;
     const tokenType = response.data?.token_type;
 
-    return this.httpService.post<{
-      token_type: string;
-      access_token: string;
-      expires_in: number;
-    }>(
+    return this.httpService.post(
       `https://api.orange.com/smsmessaging/v1/outbound/tel%3A${from}/requests`,
       {
         outboundSMSMessageRequest: {

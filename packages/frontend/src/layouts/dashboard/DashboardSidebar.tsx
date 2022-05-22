@@ -10,6 +10,7 @@ import Logo from '../../components/Logo';
 import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection/NavSection';
 import navConfig from './NavConfig';
+import { useCurrentUserContext } from './CurrentUserContext';
 
 const DRAWER_WIDTH = 280;
 
@@ -43,6 +44,8 @@ const DashboardSidebar: FunctionComponent<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  const { user } = useCurrentUserContext();
+
   const renderContent = (
     <Scrollbar
       sx={{
@@ -64,10 +67,10 @@ const DashboardSidebar: FunctionComponent<{
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {`${user.lastName} ${user.firstName}`}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
+                {user.roles.map((role) => role.name).join(', ')}
               </Typography>
             </Box>
           </AccountStyle>

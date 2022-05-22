@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { Reminder, ReminderStatus, ReminderType } from './Reminder';
-import { Appointment } from '../Appointment';
+import { Reminder, ReminderStatus, ReminderType } from './Reminder.entity';
+import { Appointment } from '../Appointment.entity';
 import { add, format } from 'date-fns';
 import { NotificationService } from '../../notification/notification.service';
 import { lastValueFrom, take } from 'rxjs';

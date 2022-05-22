@@ -14,7 +14,7 @@ axiosApiInstance.interceptors.request.use(
     if (user) {
       // eslint-disable-next-line no-param-reassign
       config.headers = {
-        Authorization: `Bearer ${user.accessToken}`,
+        Authorization: `Bearer ${user.access_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       };
@@ -40,8 +40,8 @@ axiosApiInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (error.response.status === 401 && !originalRequest._retry) {
-      localStorage.removeItem('user');
-      sessionStorage.removeItem('user');
+      // localStorage.removeItem('user');
+      // sessionStorage.removeItem('user');
 
       return axiosApiInstance(originalRequest);
     }

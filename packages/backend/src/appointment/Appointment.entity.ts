@@ -7,8 +7,8 @@ import {
   BaseEntity,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../user/User';
-import { Reminder } from './reminder/Reminder';
+import { User } from '../user/User.entity';
+import { Reminder } from './reminder/Reminder.entity';
 
 @Entity()
 export class Appointment extends BaseEntity {

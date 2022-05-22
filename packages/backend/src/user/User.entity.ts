@@ -7,8 +7,8 @@ import {
   OneToMany,
   BaseEntity,
 } from 'typeorm';
-import { Role } from './Role';
-import { Appointment } from '../appointment/Appointment';
+import { Role } from './Role.entity';
+import { Appointment } from '../appointment/Appointment.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -17,6 +17,12 @@ export class User extends BaseEntity {
 
   @Column({ unique: true })
   email: string;
+
+  @Column({ unique: false })
+  firstName: string;
+
+  @Column({ unique: false })
+  lastName: string;
 
   @Column()
   password: string;
