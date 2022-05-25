@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@aldabil/react-scheduler@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@aldabil/react-scheduler/-/react-scheduler-2.2.1.tgz#23a9e9f3b7661d196a8367fbc4ac065c0ece061d"
+  integrity sha512-IKA6kGr1sxkP1/MuBJBAy6sx1dLaP13XQDwhlFiJ8kl3psxP8jqKyminda6Fc4+RegiYiIURKFzREhLIuGhrbg==
+
 "@ampproject/remapping@^2.1.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.2.0.tgz#56c133824780de3174aed5ab6834f3026790154d"
@@ -5684,6 +5689,11 @@ data-urls@^2.0.0:
     abab "^2.0.3"
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
+
+date-fns-tz@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/date-fns-tz/-/date-fns-tz-1.3.4.tgz#8b0e75beb771c7e9f1597aba467dc14431bb5403"
+  integrity sha512-O47vEyz85F2ax/ZdhMBJo187RivZGjH6V0cPjPzpm/yi6YffJg4upD/8ibezO11ezZwP3QYlBHh/t4JhRNx0Ow==
 
 date-fns@^2.28.0:
   version "2.28.0"

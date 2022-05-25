@@ -43,7 +43,9 @@ axiosApiInstance.interceptors.response.use(
       // localStorage.removeItem('user');
       // sessionStorage.removeItem('user');
 
-      return axiosApiInstance(originalRequest);
+      window.location.href = '/login';
+
+      return;
     }
 
     return Promise.reject(error);
