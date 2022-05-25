@@ -4,7 +4,8 @@ import { NestFactory } from '@nestjs/core';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger:
-      process.env.NODE_ENV === 'development'
+      process.env.NODE_ENV === 'development' ||
+      process.env.NODE_ENV === 'localhost'
         ? ['log', 'debug', 'error', 'verbose', 'warn']
         : ['error', 'warn'],
   });

@@ -7,6 +7,11 @@ export interface AppointmentDto {
   endAt: string;
   createdAt: string;
   lastModifiedAt?: string;
+  client: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  };
 }
 
 export interface Appointment {
@@ -15,6 +20,11 @@ export interface Appointment {
   endAt: Date;
   createdAt: Date;
   lastModifiedAt?: Date;
+  client: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  };
 }
 
 export const adaptAppointmentDtosToAppointments = (
@@ -23,7 +33,7 @@ export const adaptAppointmentDtosToAppointments = (
   return appointmentDtos.map((appointmentDto) => {
     return {
       event_id: appointmentDto.id,
-      title: 'test',
+      title: `${appointmentDto.client.lastName} ${appointmentDto.client.firstName}`,
       start: parseISO(appointmentDto.startAt),
       end: parseISO(appointmentDto.endAt),
     };

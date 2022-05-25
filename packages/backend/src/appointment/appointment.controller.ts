@@ -1,4 +1,12 @@
-import { Controller, Get, Query, Body, Request, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Body,
+  Request,
+  Post,
+  Logger,
+} from '@nestjs/common';
 import { parse, parseISO } from 'date-fns';
 
 import { AppointmentService } from './appointment.service';
@@ -8,6 +16,8 @@ import { Role } from '../enums/role.enum';
 @Controller('appointments')
 export class AppointmentController {
   constructor(private readonly appointmentService: AppointmentService) {}
+
+  private readonly logger = new Logger(AppointmentController.name);
 
   @Get('all')
   getAppointments(

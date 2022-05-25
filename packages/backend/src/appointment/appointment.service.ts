@@ -1,11 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Appointment } from './Appointment.entity';
+import { sub } from 'date-fns';
 
+import { Appointment, AppointmentDto } from './Appointment.entity';
 import { UserService } from '../user/user.service';
 import { User } from '../user/User.entity';
 import { ReminderService } from './reminder/reminder.service';
 import { ReminderType } from './reminder/Reminder.entity';
-import { sub } from 'date-fns';
+import { FailureResponse } from '../types/FailureResponse';
 
 export interface CreateAppointmentProjection {
   id: string;
@@ -42,7 +43,7 @@ export class AppointmentService {
     doctorId: string;
     startAt?: Date;
     endAt?: Date;
-  }): Promise<Appointment[] | undefined> {
+  }): Promise<AppointmentDto[] | FailureResponse> {
     const builder = Appointment.createQueryBuilder('appointment').where(
       'appointment.doctorId = :doctorId',
       { doctorId },
@@ -60,7 +61,24 @@ export class AppointmentService {
       });
     }
 
-    return await builder.getMany();
+    try {
+      const result = await builder
+        .leftJoinAndSelect('appointment.client', 'client')
+        .select([
+          'appointment',
+          'client.id',
+          'client.firstName',
+          'client.lastName',
+        ])
+        .getMany();
+
+      return result;
+    } catch (error) {
+      return {
+        type: 'LoadFailure',
+        reason: error.message,
+      };
+    }
   }
 
   async createAppointment({

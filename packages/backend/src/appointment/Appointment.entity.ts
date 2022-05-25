@@ -44,3 +44,16 @@ export class Appointment extends BaseEntity {
   @OneToMany(() => Reminder, (reminder: Reminder) => reminder.appointment)
   reminders: Promise<Reminder[]>;
 }
+
+export interface AppointmentDto {
+  id: string;
+  startAt: Date;
+  endAt: Date;
+  createdAt: Date;
+  lastModifiedAt?: Date;
+  client: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  };
+}
