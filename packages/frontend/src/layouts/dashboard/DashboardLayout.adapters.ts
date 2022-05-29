@@ -9,6 +9,7 @@ export const adaptUserProfile = (profile: {
   firstName: string;
   createdAt: string;
   lastModifiedAt?: string;
+  phoneCountryPrefix: string;
   phone: string;
   roles: {
     id: string;

@@ -11,6 +11,7 @@ export interface AppointmentDto {
     id: string;
     firstName: string;
     lastName: string;
+    email: string;
   };
 }
 
@@ -24,6 +25,7 @@ export interface Appointment {
     id: string;
     firstName: string;
     lastName: string;
+    email: string;
   };
 }
 
@@ -36,6 +38,7 @@ export const adaptAppointmentDtosToAppointments = (
       title: `${appointmentDto.client.lastName} ${appointmentDto.client.firstName}`,
       start: parseISO(appointmentDto.startAt),
       end: parseISO(appointmentDto.endAt),
+      email: appointmentDto.client.email,
     };
   });
 };

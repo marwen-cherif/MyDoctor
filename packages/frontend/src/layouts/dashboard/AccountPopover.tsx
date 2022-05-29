@@ -19,6 +19,7 @@ import {
 import MenuPopover from '../../components/MenuPopover';
 import account from '../../_mock/account';
 import AuthenticationService from '../../services/authentication.service';
+import { useCurrentUserContext } from './CurrentUserContext';
 
 const AccountPopover: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -38,6 +39,8 @@ const AccountPopover: FunctionComponent = () => {
     AuthenticationService.logout();
     navigate('/login');
   }, [navigate]);
+
+  const { user } = useCurrentUserContext();
 
   return (
     <>
@@ -81,10 +84,10 @@ const AccountPopover: FunctionComponent = () => {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {`${user.lastName} ${user.firstName}`}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {user.email}
           </Typography>
         </Box>
 

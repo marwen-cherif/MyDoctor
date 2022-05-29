@@ -6,16 +6,25 @@ import {
   Request,
   Post,
   Logger,
+  Put,
+  Delete,
+  Param,
 } from '@nestjs/common';
-import { parse, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 
 import { AppointmentService } from './appointment.service';
 import { Roles } from '../auth/roles.decorator';
 import { Role } from '../enums/role.enum';
+import { UserService } from '../user/user.service';
+import { AppointmentDto } from './Appointment.entity';
+import { FailureResponse } from '../types/FailureResponse';
 
 @Controller('appointments')
 export class AppointmentController {
-  constructor(private readonly appointmentService: AppointmentService) {}
+  constructor(
+    private readonly appointmentService: AppointmentService,
+    private readonly userService: UserService,
+  ) {}
 
   private readonly logger = new Logger(AppointmentController.name);
 
@@ -40,23 +49,81 @@ export class AppointmentController {
 
   @Post('create')
   @Roles(Role.Doctor)
-  createAppointment(
+  async createAppointment(
     @Request() request,
     @Body()
     body: {
       startAt: string;
       endAt: string;
-      clientId: string;
+      clientEmail: string;
     },
-  ) {
-    const startAt = parse(body.startAt, 'yyyy-MM-dd HH:mm:ss', new Date());
-    const endAt = parse(body.endAt, 'yyyy-MM-dd HH:mm:ss', new Date());
+  ): Promise<AppointmentDto | FailureResponse> {
+    const startAt = parseISO(body.startAt);
+    const endAt = parseISO(body.endAt);
+
+    const client = await this.userService.findOne(body.clientEmail);
+
+    if (!client) {
+      return {
+        type: 'NotFound',
+        reason: 'Client not found',
+      };
+    }
 
     return this.appointmentService.createAppointment({
       startAt,
       endAt,
-      clientId: body.clientId,
+      clientId: client.id,
       user: request.user,
+    });
+  }
+
+  @Put('')
+  @Roles(Role.Doctor)
+  async updateAppointment(
+    @Request() request,
+    @Body()
+    body: {
+      id: string;
+      startAt: string;
+      endAt: string;
+      clientEmail: string;
+    },
+  ): Promise<AppointmentDto | FailureResponse> {
+    const startAt = parseISO(body.startAt);
+    const endAt = parseISO(body.endAt);
+
+    const client = await this.userService.findOne(body.clientEmail);
+    const appointment = await this.appointmentService.findOne(body.id);
+
+    if (!client) {
+      return {
+        type: 'NotFound',
+        reason: 'Client not found',
+      };
+    }
+
+    return this.appointmentService.updateAppointment({
+      appointment,
+      startAt,
+      endAt,
+      clientId: client.id,
+    });
+  }
+
+  @Delete(':id')
+  @Roles(Role.Doctor)
+  async deleteAppointment(
+    @Param('id') id: string,
+  ): Promise<AppointmentDto | FailureResponse> {
+    this.logger.verbose('deleteAppointment');
+
+    const appointment = await this.appointmentService.findOne(id);
+
+    this.logger.verbose(id, JSON.stringify(appointment));
+
+    return this.appointmentService.deleteAppointment({
+      appointment,
     });
   }
 }

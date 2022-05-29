@@ -38,6 +38,12 @@ export class Reminder extends BaseEntity {
   @Column()
   status: ReminderStatus;
 
+  @Column({ nullable: false, default: false })
+  isDeleted: boolean;
+
+  @Column({ nullable: true })
+  deletedAt: Date;
+
   @ManyToOne(
     () => Appointment,
     (appointment: Appointment) => appointment.reminders,

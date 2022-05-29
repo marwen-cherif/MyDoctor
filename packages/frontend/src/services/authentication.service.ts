@@ -13,6 +13,9 @@ class AuthenticationService {
     password: string;
     rememberMe: boolean;
   }) {
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
+
     return axiosApiInstance
       .post(API_URL_LOGIN, {
         email,
@@ -21,8 +24,10 @@ class AuthenticationService {
       .then((response) => {
         if (rememberMe && response.data.access_token) {
           localStorage.setItem('user', JSON.stringify(response.data));
+          sessionStorage.removeItem('user');
         } else if (!rememberMe && response.data.access_token) {
           sessionStorage.setItem('user', JSON.stringify(response.data));
+          localStorage.removeItem('user');
         }
 
         return response.data;
@@ -35,6 +40,9 @@ class AuthenticationService {
   }
 
   register(email: string, password: string, phone: string) {
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
+
     return axiosApiInstance.post(API_URL_REGISTER, {
       email,
       password,

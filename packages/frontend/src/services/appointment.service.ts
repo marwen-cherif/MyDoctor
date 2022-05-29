@@ -29,8 +29,48 @@ class AppointmentService {
       endpoint.href,
     );
   }
-  createNewAppointment() {
-    return axiosApiInstance.post(`${API_URL}/create`);
+  createNewAppointment({
+    startAt,
+    endAt,
+    clientEmail,
+  }: {
+    startAt: string;
+    endAt: string;
+    clientEmail: string;
+  }) {
+    return axiosApiInstance.post<AppointmentDto | FailureResponse>(
+      `${API_URL}/create`,
+      {
+        startAt,
+        endAt,
+        clientEmail,
+      },
+    );
+  }
+  updateAppointment({
+    id,
+    startAt,
+    endAt,
+    clientEmail,
+  }: {
+    id: string | number;
+    startAt: string;
+    endAt: string;
+    clientEmail: string;
+  }) {
+    return axiosApiInstance.put<AppointmentDto | FailureResponse>(
+      `${API_URL}`,
+      {
+        id,
+        startAt,
+        endAt,
+        clientEmail,
+      },
+    );
+  }
+
+  deleteAppointment({ id }: { id: string | number }) {
+    return axiosApiInstance.delete<void | FailureResponse>(`${API_URL}/${id}`);
   }
 }
 export default new AppointmentService();

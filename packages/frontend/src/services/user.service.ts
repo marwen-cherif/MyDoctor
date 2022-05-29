@@ -11,6 +11,7 @@ class UserService {
       createdAt: string;
       lastModifiedAt?: string;
       phone: string;
+      phoneCountryPrefix: string;
       roles: {
         id: string;
         name: RoleType;

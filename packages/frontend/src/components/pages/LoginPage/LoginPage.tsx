@@ -6,8 +6,6 @@ import {
   Container,
   CssBaseline,
   FormControlLabel,
-  Grid,
-  Link,
   TextField,
   Typography,
 } from '@mui/material';
@@ -49,8 +47,6 @@ const LoginPage: FunctionComponent = () => {
         >
           <TextField
             margin="normal"
-            required
-            fullWidth
             id="email"
             label="Email Address"
             autoComplete="email"
@@ -58,11 +54,11 @@ const LoginPage: FunctionComponent = () => {
             {...register('email')}
             error={Boolean(errors.email)}
             helperText={errors.email ? errors.email.message : undefined}
+            required
+            fullWidth
           />
           <TextField
             margin="normal"
-            required
-            fullWidth
             label="Password"
             type="password"
             id="password"
@@ -70,15 +66,11 @@ const LoginPage: FunctionComponent = () => {
             {...register('password')}
             error={Boolean(errors.password)}
             helperText={errors.password ? errors.password.message : undefined}
+            required
+            fullWidth
           />
           <FormControlLabel
-            control={
-              <Checkbox
-                value={true}
-                color="primary"
-                {...register('rememberMe')}
-              />
-            }
+            control={<Checkbox value={true} {...register('rememberMe')} />}
             label="Remember me"
           />
 
@@ -92,18 +84,18 @@ const LoginPage: FunctionComponent = () => {
             Sign In
           </LoadingButton>
 
-          <Grid container>
-            <Grid item xs>
-              <Link href="src/pages/LoginPage/LoginPage#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="src/pages/LoginPage/LoginPage#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          {/*<Grid container>*/}
+          {/*  <Grid item xs>*/}
+          {/*    <Link href="src/pages/LoginPage/LoginPage#" variant="body2">*/}
+          {/*      Forgot password?*/}
+          {/*    </Link>*/}
+          {/*  </Grid>*/}
+          {/*  <Grid item>*/}
+          {/*    <Link href="src/pages/LoginPage/LoginPage#" variant="body2">*/}
+          {/*      {"Don't have an account? Sign Up"}*/}
+          {/*    </Link>*/}
+          {/*  </Grid>*/}
+          {/*</Grid>*/}
         </Box>
       </Box>
     </Container>

@@ -33,6 +33,9 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   lastModifiedAt: Date;
 
+  @Column({ unique: false })
+  phoneCountryPrefix: string;
+
   @Column({ unique: true })
   phone: string;
 

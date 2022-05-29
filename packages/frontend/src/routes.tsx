@@ -1,10 +1,10 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 import { DashboardLayout } from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
-import NotFound from './pages/NotFoundPage';
+import NotFound from './components/pages/NotFoundPage';
 import AuthenticationService from './services/authentication.service';
-import LoginPage from './pages/LoginPage/LoginPage';
-import AppointmentPage from './pages/AppointmentPage/AppointmentPage';
+import LoginPage from './components/pages/LoginPage/LoginPage';
+import AppointmentPage from './components/pages/AppointmentPage/AppointmentPage';
 
 export const RoutesConfig = {
   Login: 'login',

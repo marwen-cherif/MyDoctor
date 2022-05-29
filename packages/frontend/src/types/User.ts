@@ -7,6 +7,7 @@ export interface User {
   firstName: string;
   createdAt: Date;
   lastModifiedAt?: Date;
+  phoneCountryPrefix: string;
   phone: string;
   roles: {
     id: string;

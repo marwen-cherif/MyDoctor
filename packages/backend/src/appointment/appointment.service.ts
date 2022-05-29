@@ -8,24 +8,6 @@ import { ReminderService } from './reminder/reminder.service';
 import { ReminderType } from './reminder/Reminder.entity';
 import { FailureResponse } from '../types/FailureResponse';
 
-export interface CreateAppointmentProjection {
-  id: string;
-  client: {
-    id: string;
-    email: string;
-    phone: string;
-  };
-  doctor: {
-    id: string;
-    email: string;
-    phone: string;
-  };
-  startAt: Date;
-  endAt: Date;
-  createdAt: Date;
-  lastModifiedAt: Date;
-}
-
 @Injectable()
 export class AppointmentService {
   constructor(
@@ -34,6 +16,10 @@ export class AppointmentService {
   ) {}
 
   private readonly logger = new Logger(AppointmentService.name);
+
+  async findOne(id: string): Promise<Appointment | undefined> {
+    return Appointment.findOne({ where: { id } });
+  }
 
   async getAppointments({
     doctorId,
@@ -69,7 +55,9 @@ export class AppointmentService {
           'client.id',
           'client.firstName',
           'client.lastName',
+          'client.email',
         ])
+        .andWhere('appointment.isDeleted = false')
         .getMany();
 
       return result;
@@ -91,7 +79,7 @@ export class AppointmentService {
     endAt: Date;
     clientId: string;
     user: User;
-  }): Promise<CreateAppointmentProjection> {
+  }): Promise<AppointmentDto> {
     const appointment = new Appointment();
     appointment.startAt = startAt;
     appointment.endAt = endAt;
@@ -113,16 +101,80 @@ export class AppointmentService {
       endAt: newAppointment.endAt,
       createdAt: newAppointment.createdAt,
       lastModifiedAt: newAppointment.lastModifiedAt,
-      doctor: {
-        id: newAppointment.doctor.id,
-        email: newAppointment.doctor.email,
-        phone: newAppointment.doctor.phone,
-      },
       client: {
         id: newAppointment.client.id,
+        lastName: newAppointment.client.lastName,
+        firstName: newAppointment.client.firstName,
         email: newAppointment.client.email,
-        phone: newAppointment.client.phone,
       },
     };
+  }
+
+  async updateAppointment({
+    appointment,
+    startAt,
+    endAt,
+    clientId,
+  }: {
+    appointment: Appointment;
+    startAt: Date;
+    endAt: Date;
+    clientId: string;
+  }): Promise<AppointmentDto> {
+    appointment.startAt = startAt;
+    appointment.endAt = endAt;
+    appointment.client = await this.userService.findOneById(clientId);
+    appointment.lastModifiedAt = new Date();
+
+    const newAppointment = await appointment.save();
+
+    const reminders = await appointment.reminders;
+
+    await Promise.all(
+      (reminders || []).map((reminder) =>
+        this.reminderService.deleteReminder({ id: reminder.id }),
+      ),
+    );
+
+    await this.reminderService.createReminder({
+      date: sub(newAppointment.startAt, { days: 1 }),
+      reminderType: ReminderType.Sms,
+      appointment: newAppointment,
+    });
+
+    return {
+      id: newAppointment.id,
+      startAt: newAppointment.startAt,
+      endAt: newAppointment.endAt,
+      createdAt: newAppointment.createdAt,
+      lastModifiedAt: newAppointment.lastModifiedAt,
+      client: {
+        id: newAppointment.client.id,
+        lastName: newAppointment.client.lastName,
+        firstName: newAppointment.client.firstName,
+        email: newAppointment.client.email,
+      },
+    };
+  }
+
+  async deleteAppointment({
+    appointment,
+  }: {
+    appointment: Appointment;
+  }): Promise<AppointmentDto> {
+    appointment.isDeleted = true;
+    appointment.deletedAt = new Date();
+
+    await appointment.save();
+
+    const reminders = await appointment.reminders;
+
+    await Promise.all(
+      (reminders || []).map((reminder) =>
+        this.reminderService.deleteReminder({ id: reminder.id }),
+      ),
+    );
+
+    return;
   }
 }

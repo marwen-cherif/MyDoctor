@@ -3,9 +3,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Box, Link, Drawer, Typography, Avatar } from '@mui/material';
 import account from '../../_mock/account';
-import useResponsive, {
-  QueryTypes,
-} from '../../components/hooks/useResponsive';
+import useResponsive, { QueryTypes } from '../../hooks/useResponsive';
 import Logo from '../../components/Logo';
 import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection/NavSection';

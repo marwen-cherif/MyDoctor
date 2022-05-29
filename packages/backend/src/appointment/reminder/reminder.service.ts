@@ -63,9 +63,23 @@ export class ReminderService {
       .andWhere('reminder.status = :createdStatus', {
         createdStatus: ReminderStatus.Created,
       })
+      .andWhere('reminder.isDeleted = false')
       .innerJoinAndSelect('reminder.appointment', 'appointment')
       .innerJoinAndSelect('appointment.client', 'client')
       .getMany();
+  }
+
+  async deleteReminder({ id }: { id: string }) {
+    const reminder = await Reminder.findOne({ where: { id } });
+
+    if (reminder.status !== ReminderStatus.Sent && !reminder.isDeleted) {
+      reminder.deletedAt = new Date();
+      reminder.isDeleted = true;
+
+      return await reminder.save();
+    }
+
+    return;
   }
 
   @Cron(CronExpression.EVERY_10_MINUTES, {
@@ -85,7 +99,7 @@ export class ReminderService {
           try {
             const sendSmsObservable = await this.notificationService.sendSms({
               from: this.configService.get('SMS_SENDER'),
-              to: reminder.appointment.client.phone,
+              to: `+${reminder.appointment.client.phoneCountryPrefix}${reminder.appointment.client.phone}`,
               message: `You have an appointment at ${format(
                 reminder.date,
                 'dd/MM/yyyy HH:mm',

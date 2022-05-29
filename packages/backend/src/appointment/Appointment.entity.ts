@@ -27,6 +27,12 @@ export class Appointment extends BaseEntity {
   @Column({ nullable: true })
   lastModifiedAt: Date;
 
+  @Column({ nullable: false, default: false })
+  isDeleted: boolean;
+
+  @Column({ nullable: true })
+  deletedAt: Date;
+
   @ManyToOne(() => User, (user) => user.clientAppointments, {
     nullable: false,
     cascade: true,
@@ -55,5 +61,6 @@ export interface AppointmentDto {
     id: string;
     firstName: string;
     lastName: string;
+    email: string;
   };
 }
