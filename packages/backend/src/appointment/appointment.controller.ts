@@ -11,13 +11,13 @@ import {
   Param,
 } from '@nestjs/common';
 import { parseISO } from 'date-fns';
+import { FailureResponse } from '@mydoctor/common/types';
+import { AppointmentDto } from '@mydoctor/common/dto';
 
 import { AppointmentService } from './appointment.service';
 import { Roles } from '../auth/roles.decorator';
 import { Role } from '../enums/role.enum';
 import { UserService } from '../user/user.service';
-import { AppointmentDto } from './Appointment.entity';
-import { FailureResponse } from '../types/FailureResponse';
 
 @Controller('appointments')
 export class AppointmentController {

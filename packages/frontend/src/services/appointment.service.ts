@@ -1,6 +1,6 @@
 import axiosApiInstance from './axiosApiInstance';
-import { FailureResponse } from '@mydoctor/common/types/FailureResponse';
-import { AppointmentDto } from '../types/Appointment';
+import { FailureResponse } from '@mydoctor/common/types';
+import { AppointmentDto } from '@mydoctor/common/dto';
 
 const API_URL = `${process.env.REACT_APP_BACK_END_BASE_URL}/appointments`;
 

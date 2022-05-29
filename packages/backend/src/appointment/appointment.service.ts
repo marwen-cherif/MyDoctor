@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { sub } from 'date-fns';
+import { formatISO, sub } from 'date-fns';
+import { AppointmentDto } from '@mydoctor/common/dto';
 
-import { Appointment, AppointmentDto } from './Appointment.entity';
+import { Appointment } from './Appointment.entity';
 import { UserService } from '../user/user.service';
 import { User } from '../user/User.entity';
 import { ReminderService } from './reminder/reminder.service';
@@ -29,7 +30,7 @@ export class AppointmentService {
     doctorId: string;
     startAt?: Date;
     endAt?: Date;
-  }): Promise<AppointmentDto[] | FailureResponse> {
+  }): Promise<Appointment[] | FailureResponse> {
     const builder = Appointment.createQueryBuilder('appointment').where(
       'appointment.doctorId = :doctorId',
       { doctorId },
@@ -97,10 +98,10 @@ export class AppointmentService {
 
     return {
       id: newAppointment.id,
-      startAt: newAppointment.startAt,
-      endAt: newAppointment.endAt,
-      createdAt: newAppointment.createdAt,
-      lastModifiedAt: newAppointment.lastModifiedAt,
+      startAt: formatISO(newAppointment.startAt),
+      endAt: formatISO(newAppointment.endAt),
+      createdAt: formatISO(newAppointment.createdAt),
+      lastModifiedAt: formatISO(newAppointment.lastModifiedAt),
       client: {
         id: newAppointment.client.id,
         lastName: newAppointment.client.lastName,
@@ -144,10 +145,10 @@ export class AppointmentService {
 
     return {
       id: newAppointment.id,
-      startAt: newAppointment.startAt,
-      endAt: newAppointment.endAt,
-      createdAt: newAppointment.createdAt,
-      lastModifiedAt: newAppointment.lastModifiedAt,
+      startAt: formatISO(newAppointment.startAt),
+      endAt: formatISO(newAppointment.endAt),
+      createdAt: formatISO(newAppointment.createdAt),
+      lastModifiedAt: formatISO(newAppointment.lastModifiedAt),
       client: {
         id: newAppointment.client.id,
         lastName: newAppointment.client.lastName,

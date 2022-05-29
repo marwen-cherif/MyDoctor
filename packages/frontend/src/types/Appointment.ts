@@ -1,19 +1,6 @@
 import { parseISO } from 'date-fns';
 import { ProcessedEvent } from '@aldabil/react-scheduler/dist/types';
-
-export interface AppointmentDto {
-  id: string;
-  startAt: string;
-  endAt: string;
-  createdAt: string;
-  lastModifiedAt?: string;
-  client: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-  };
-}
+import { AppointmentDto } from '@mydoctor/common/dto';
 
 export interface Appointment {
   id: string;
