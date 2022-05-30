@@ -2,7 +2,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import { DashboardLayout } from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import NotFound from './components/pages/NotFoundPage';
-import AuthenticationService from './services/authentication.service';
+import AuthenticationService from './services/AuthenticationService';
 import LoginPage from './components/pages/LoginPage/LoginPage';
 import AppointmentPage from './components/pages/AppointmentPage/AppointmentPage';
 
@@ -14,11 +14,6 @@ export const RoutesConfig = {
 };
 
 const Router = () => {
-  const basicRoutes = [
-    { path: RoutesConfig.Login, element: <LoginPage /> },
-    { path: RoutesConfig.NotFound, element: <NotFound /> },
-  ];
-
   const routes = AuthenticationService.isLoggedIn()
     ? [
         {
@@ -32,7 +27,8 @@ const Router = () => {
           path: '/',
           element: <LogoOnlyLayout />,
           children: [
-            ...basicRoutes,
+            { path: RoutesConfig.Login, element: <LoginPage /> },
+            { path: RoutesConfig.NotFound, element: <NotFound /> },
             {
               path: '/',
               element: (
@@ -51,18 +47,8 @@ const Router = () => {
         { path: '*', element: <Navigate to={RoutesConfig.NotFound} replace /> },
       ]
     : [
-        {
-          path: '/',
-          element: <LogoOnlyLayout />,
-          children: [
-            ...basicRoutes,
-            {
-              path: '*',
-              element: <Navigate to={RoutesConfig.Login} replace />,
-            },
-          ],
-        },
         { path: '*', element: <Navigate to={RoutesConfig.Login} replace /> },
+        { path: RoutesConfig.Login, element: <LoginPage /> },
       ];
 
   return useRoutes(routes);
