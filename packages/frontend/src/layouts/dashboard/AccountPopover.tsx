@@ -18,12 +18,14 @@ import {
 } from '@mui/material';
 import MenuPopover from '../../components/MenuPopover';
 import account from '../../_mock/account';
-import AuthenticationService from '../../services/authentication.service';
+import AuthenticationService from '../../services/AuthenticationService';
 import { useCurrentUserContext } from './CurrentUserContext';
+import { useQueryClient } from 'react-query';
 
 const AccountPopover: FunctionComponent = () => {
   const navigate = useNavigate();
   const anchorRef = useRef(null);
+  const queryClient = useQueryClient();
 
   const [open, setOpen] = useState<(EventTarget & Element) | null>(null);
 
@@ -37,8 +39,11 @@ const AccountPopover: FunctionComponent = () => {
 
   const handleLogout = useCallback(() => {
     AuthenticationService.logout();
+
+    queryClient.invalidateQueries('getProfile');
+
     navigate('/login');
-  }, [navigate]);
+  }, [navigate, queryClient]);
 
   const { user } = useCurrentUserContext();
 

@@ -1,4 +1,4 @@
-import axiosApiInstance from './axiosApiInstance';
+import axiosApiInstance from '../helpers/axiosApiInstance';
 
 const API_URL_LOGIN = `${process.env.REACT_APP_BACK_END_BASE_URL}/auth/login`;
 const API_URL_REGISTER = `${process.env.REACT_APP_BACK_END_BASE_URL}/auth/register`;

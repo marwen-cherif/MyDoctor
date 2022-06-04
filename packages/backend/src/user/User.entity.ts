@@ -15,8 +15,8 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true })
-  email: string;
+  @Column({ unique: true, nullable: true })
+  email?: string;
 
   @Column({ unique: false })
   firstName: string;
@@ -24,14 +24,14 @@ export class User extends BaseEntity {
   @Column({ unique: false })
   lastName: string;
 
-  @Column()
-  password: string;
+  @Column({ nullable: true, default: '' })
+  password?: string;
 
   @Column({ nullable: false })
   createdAt: Date;
 
   @Column({ nullable: true })
-  lastModifiedAt: Date;
+  lastModifiedAt?: Date;
 
   @Column({ unique: false })
   phoneCountryPrefix: string;

@@ -1,6 +1,6 @@
-import axiosApiInstance from './axiosApiInstance';
+import axiosApiInstance from '../helpers/axiosApiInstance';
 import { FailureResponse } from '@mydoctor/common/types';
-import { AppointmentDto } from '@mydoctor/common/dto';
+import { CreateAppointmentPayload, AppointmentDto } from '@mydoctor/common/dto';
 
 const API_URL = `${process.env.REACT_APP_BACK_END_BASE_URL}/appointments`;
 
@@ -29,21 +29,13 @@ class AppointmentService {
       endpoint.href,
     );
   }
-  createNewAppointment({
-    startAt,
-    endAt,
-    clientEmail,
-  }: {
-    startAt: string;
-    endAt: string;
-    clientEmail: string;
-  }) {
+  createNewAppointment({ startAt, endAt, clientId }: CreateAppointmentPayload) {
     return axiosApiInstance.post<AppointmentDto | FailureResponse>(
       `${API_URL}/create`,
       {
         startAt,
         endAt,
-        clientEmail,
+        clientId,
       },
     );
   }
@@ -51,12 +43,10 @@ class AppointmentService {
     id,
     startAt,
     endAt,
-    clientEmail,
   }: {
     id: string | number;
     startAt: string;
     endAt: string;
-    clientEmail: string;
   }) {
     return axiosApiInstance.put<AppointmentDto | FailureResponse>(
       `${API_URL}`,
@@ -64,7 +54,6 @@ class AppointmentService {
         id,
         startAt,
         endAt,
-        clientEmail,
       },
     );
   }

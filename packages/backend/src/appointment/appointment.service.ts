@@ -1,13 +1,13 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { formatISO, sub } from 'date-fns';
 import { AppointmentDto } from '@mydoctor/common/dto';
+import { FailureResponse } from '@mydoctor/common/types';
 
 import { Appointment } from './Appointment.entity';
 import { UserService } from '../user/user.service';
 import { User } from '../user/User.entity';
 import { ReminderService } from './reminder/reminder.service';
 import { ReminderType } from './reminder/Reminder.entity';
-import { FailureResponse } from '../types/FailureResponse';
 
 @Injectable()
 export class AppointmentService {
@@ -101,7 +101,6 @@ export class AppointmentService {
       startAt: formatISO(newAppointment.startAt),
       endAt: formatISO(newAppointment.endAt),
       createdAt: formatISO(newAppointment.createdAt),
-      lastModifiedAt: formatISO(newAppointment.lastModifiedAt),
       client: {
         id: newAppointment.client.id,
         lastName: newAppointment.client.lastName,
@@ -115,16 +114,13 @@ export class AppointmentService {
     appointment,
     startAt,
     endAt,
-    clientId,
   }: {
     appointment: Appointment;
     startAt: Date;
     endAt: Date;
-    clientId: string;
   }): Promise<AppointmentDto> {
     appointment.startAt = startAt;
     appointment.endAt = endAt;
-    appointment.client = await this.userService.findOneById(clientId);
     appointment.lastModifiedAt = new Date();
 
     const newAppointment = await appointment.save();

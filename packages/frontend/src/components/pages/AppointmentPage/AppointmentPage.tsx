@@ -22,6 +22,7 @@ const AppointmentPage: FC<React.PropsWithChildren<unknown>> = () => {
         loading={isGetAppointmentsLoading || isDeletingAppointment}
         events={appointments}
         locale={frLocale}
+        dialogMaxWidth="lg"
         customEditor={(scheduler) => (
           <CreateNewAppointment scheduler={scheduler} />
         )}

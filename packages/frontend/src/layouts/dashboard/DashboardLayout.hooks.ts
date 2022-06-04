@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import UserService from '../../services/user.service';
+import UserService from '../../services/AppService';
 import { adaptUserProfile } from './DashboardLayout.adapters';
 
 export const useDashboardLayout = () => {

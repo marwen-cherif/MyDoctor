@@ -4,9 +4,10 @@ import { SchedulerHelpers } from '@aldabil/react-scheduler/dist/types';
 import { CreateNewAppointmentForm } from './CreateNewAppointment.types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './CreateNewAppointment.schema';
-import AppointmentService from '../../../../services/appointment.service';
+import AppointmentService from '../../../../services/AppointmentService';
 import { isFailureResponse } from '@mydoctor/common/types/FailureResponse';
 import { formatInTimeZone } from 'date-fns-tz';
+import UserService from '../../../../services/UserService';
 
 interface UseCreateNewAppointmentProps {
   scheduler: SchedulerHelpers;
@@ -21,7 +22,14 @@ export const useCreateNewAppointment = ({
     defaultValues: {
       startAt: event?.start || scheduler.state?.start?.value,
       endAt: event?.end || scheduler.state?.end?.value,
-      clientEmail: event?.email,
+      search: undefined,
+      client: {
+        email: event?.client.email,
+        lastName: event?.client.lastname,
+        firstName: event?.client.firstName,
+        phone: event?.client.phone,
+        phoneCountryPrefix: event?.client.phoneCountryPrefix || '+216',
+      },
     },
     resolver: yupResolver(schema),
   });
@@ -30,6 +38,19 @@ export const useCreateNewAppointment = ({
     async (data: CreateNewAppointmentForm) => {
       try {
         scheduler.loading(true);
+
+        const upsertClientResponse = await UserService.upsertClient({
+          firstName: data.client.firstName,
+          id: data.search.data?.id,
+          lastName: data.client.lastName,
+          phone: data.client.phone,
+          phoneCountryPrefix: data.client.phoneCountryPrefix,
+          email: data.client.email,
+        });
+
+        if (isFailureResponse(upsertClientResponse.data)) {
+          return;
+        }
 
         const response = event?.event_id
           ? await AppointmentService.updateAppointment({
@@ -44,7 +65,6 @@ export const useCreateNewAppointment = ({
                 'UTC',
                 "yyyy-MM-dd'T'HH:mm:ss'Z'",
               ),
-              clientEmail: data.clientEmail,
             })
           : await AppointmentService.createNewAppointment({
               startAt: formatInTimeZone(
@@ -57,7 +77,7 @@ export const useCreateNewAppointment = ({
                 'UTC',
                 "yyyy-MM-dd'T'HH:mm:ss'Z'",
               ),
-              clientEmail: data.clientEmail,
+              clientId: upsertClientResponse.data.id,
             });
 
         if (isFailureResponse(response.data)) {
@@ -73,6 +93,7 @@ export const useCreateNewAppointment = ({
           },
           event?.event_id ? 'edit' : 'create',
         );
+
         scheduler.close();
       } finally {
         scheduler.loading(false);

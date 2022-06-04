@@ -1,7 +1,7 @@
-import axiosApiInstance from './axiosApiInstance';
+import axiosApiInstance from '../helpers/axiosApiInstance';
 import { RoleType } from '@mydoctor/common/enums';
 
-class UserService {
+class AppService {
   getProfile() {
     return axiosApiInstance.get<{
       id: string;
@@ -19,4 +19,4 @@ class UserService {
     }>(`${process.env.REACT_APP_BACK_END_BASE_URL}/profile`);
   }
 }
-export default new UserService();
+export default new AppService();

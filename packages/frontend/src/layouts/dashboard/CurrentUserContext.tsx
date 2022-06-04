@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import createGenericContext from '../../services/createGenericContext';
+import createGenericContext from '../../helpers/createGenericContext';
 import { User } from '../../types/User';
 
 export interface CurrentUserContextArgs {

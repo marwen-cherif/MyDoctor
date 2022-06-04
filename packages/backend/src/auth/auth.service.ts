@@ -18,7 +18,7 @@ export class AuthService {
 
     // const hashKey = hashSync('test', 10);
 
-    if (user && compareSync(payload.password, user.password)) {
+    if (user && user.password && compareSync(payload.password, user.password)) {
       const { password, ...result } = user;
 
       return result;

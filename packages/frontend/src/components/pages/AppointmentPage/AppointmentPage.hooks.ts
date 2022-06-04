@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { format } from 'date-fns-tz';
-import AppointmentService from '../../../services/appointment.service';
+import AppointmentService from '../../../services/AppointmentService';
 import { isFailureResponse } from '@mydoctor/common/types/FailureResponse';
 import { adaptAppointmentDtosToAppointments } from '../../../types/Appointment';
 import { useCurrentUserContext } from '../../../layouts/dashboard/CurrentUserContext';
@@ -21,6 +21,10 @@ export const useAppointmentPage = () => {
   } = useQuery(
     queryKeys,
     async () => {
+      if (!query) {
+        return [];
+      }
+
       const queryParts = query.split('&');
       const startDate = new Date(queryParts[0].replace('?start=', ''));
       const endDate = new Date(queryParts[1].replace('?start=', ''));

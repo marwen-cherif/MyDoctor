@@ -99,7 +99,7 @@ export class ReminderService {
           try {
             const sendSmsObservable = await this.notificationService.sendSms({
               from: this.configService.get('SMS_SENDER'),
-              to: `+${reminder.appointment.client.phoneCountryPrefix}${reminder.appointment.client.phone}`,
+              to: `${reminder.appointment.client.phoneCountryPrefix}${reminder.appointment.client.phone}`,
               message: `You have an appointment at ${format(
                 reminder.date,
                 'dd/MM/yyyy HH:mm',

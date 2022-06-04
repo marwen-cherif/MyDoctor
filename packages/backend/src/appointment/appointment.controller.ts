@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { parseISO } from 'date-fns';
 import { FailureResponse } from '@mydoctor/common/types';
-import { AppointmentDto } from '@mydoctor/common/dto';
+import { AppointmentDto, CreateAppointmentPayload } from '@mydoctor/common/dto';
 
 import { AppointmentService } from './appointment.service';
 import { Roles } from '../auth/roles.decorator';
@@ -52,16 +52,12 @@ export class AppointmentController {
   async createAppointment(
     @Request() request,
     @Body()
-    body: {
-      startAt: string;
-      endAt: string;
-      clientEmail: string;
-    },
+    body: CreateAppointmentPayload,
   ): Promise<AppointmentDto | FailureResponse> {
     const startAt = parseISO(body.startAt);
     const endAt = parseISO(body.endAt);
 
-    const client = await this.userService.findOne(body.clientEmail);
+    const client = await this.userService.findOneById(body.clientId);
 
     if (!client) {
       return {
@@ -87,27 +83,17 @@ export class AppointmentController {
       id: string;
       startAt: string;
       endAt: string;
-      clientEmail: string;
     },
   ): Promise<AppointmentDto | FailureResponse> {
     const startAt = parseISO(body.startAt);
     const endAt = parseISO(body.endAt);
 
-    const client = await this.userService.findOne(body.clientEmail);
     const appointment = await this.appointmentService.findOne(body.id);
-
-    if (!client) {
-      return {
-        type: 'NotFound',
-        reason: 'Client not found',
-      };
-    }
 
     return this.appointmentService.updateAppointment({
       appointment,
       startAt,
       endAt,
-      clientId: client.id,
     });
   }
 
@@ -119,8 +105,6 @@ export class AppointmentController {
     this.logger.verbose('deleteAppointment');
 
     const appointment = await this.appointmentService.findOne(id);
-
-    this.logger.verbose(id, JSON.stringify(appointment));
 
     return this.appointmentService.deleteAppointment({
       appointment,
