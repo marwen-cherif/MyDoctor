@@ -20,6 +20,7 @@ import MenuPopover from '../../components/MenuPopover';
 import AuthenticationService from '../../services/AuthenticationService';
 import { useCurrentUserContext } from './CurrentUserContext';
 import { useQueryClient } from 'react-query';
+import { FormattedMessage } from 'react-intl';
 
 const AccountPopover: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -101,7 +102,7 @@ const AccountPopover: FunctionComponent = () => {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
-          Logout
+          <FormattedMessage defaultMessage="Logout" />
         </MenuItem>
       </MenuPopover>
     </>

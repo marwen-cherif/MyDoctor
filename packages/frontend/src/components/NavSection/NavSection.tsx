@@ -8,9 +8,10 @@ const NavSection: FunctionComponent<{
   navConfig: {
     children?: any;
     path: string;
-    title: string;
+    title: ReactNode;
     icon: ReactNode;
     info?: ReactNode;
+    id: string;
   }[];
 }> = ({ navConfig, ...other }) => {
   const { pathname } = useLocation();
@@ -22,7 +23,7 @@ const NavSection: FunctionComponent<{
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
         {navConfig.map((item) => (
-          <NavItem key={item.title} item={item} active={match} />
+          <NavItem key={item.id} item={item} active={match} />
         ))}
       </List>
     </Box>

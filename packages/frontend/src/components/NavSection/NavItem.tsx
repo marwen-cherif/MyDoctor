@@ -35,9 +35,10 @@ interface NavItemProps {
   item: {
     children?: any;
     path: string;
-    title: string;
+    title: ReactNode;
     icon: ReactNode;
     info?: ReactNode;
+    id: string;
   };
   active: (path: string) => boolean;
 }

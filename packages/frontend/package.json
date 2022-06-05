@@ -54,8 +54,8 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "extract:messages": "formatjs extract src/**/*.tsx --out-file lang/en.json --id-interpolation-pattern [sha512:contenthash:base64:6] --format simple",
-    "compile:messages-en": "formatjs compile lang/en.json --ast --out-file src/compiled-messages/en.json --format formatter.js",
-    "compile:messages-fr": "formatjs compile lang/fr.json --ast --out-file src/compiled-messages/fr.json --format formatter.js"
+    "compile:messages-en": "formatjs compile lang/en.json --ast --out-file src/compiled-messages/en.json --format simple",
+    "compile:messages-fr": "formatjs compile lang/fr.json --ast --out-file src/compiled-messages/fr.json --format simple"
   },
   "eslintConfig": {
     "extends": [
