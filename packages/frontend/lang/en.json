@@ -1,7 +1,7 @@
 [
     {
         "term": "2mRLis",
-        "definition": "Search Customer",
+        "definition": "Rechercher un client",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -9,7 +9,7 @@
     },
     {
         "term": "47FYwb",
-        "definition": "Cancel",
+        "definition": "Annuler",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -17,7 +17,7 @@
     },
     {
         "term": "GDeZCO",
-        "definition": "Create a new appointment",
+        "definition": "Cr\u00e9er un nouveau rendez-vous",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -25,7 +25,7 @@
     },
     {
         "term": "HcSuIf",
-        "definition": "Country prefix",
+        "definition": "Pr\u00e9fix du pays",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -33,7 +33,7 @@
     },
     {
         "term": "LwgKgu",
-        "definition": "Appointments",
+        "definition": "Rendez-vous",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -41,7 +41,7 @@
     },
     {
         "term": "N2IrpM",
-        "definition": "Confirm",
+        "definition": "Confirmer",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -49,7 +49,7 @@
     },
     {
         "term": "O95R3Z",
-        "definition": "Phone",
+        "definition": "T\u00e9l\u00e9phoner",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -57,7 +57,7 @@
     },
     {
         "term": "VDgfLx",
-        "definition": "New Customer",
+        "definition": "Nouveau client",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -65,7 +65,7 @@
     },
     {
         "term": "pONqz8",
-        "definition": "First name",
+        "definition": "Pr\u00e9nom",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -73,7 +73,7 @@
     },
     {
         "term": "sy+pv5",
-        "definition": "Email",
+        "definition": "E-mail",
         "context": "",
         "term_plural": "",
         "reference": "",
@@ -81,7 +81,7 @@
     },
     {
         "term": "txUL0F",
-        "definition": "Last name",
+        "definition": "Nom de famille",
         "context": "",
         "term_plural": "",
         "reference": "",
