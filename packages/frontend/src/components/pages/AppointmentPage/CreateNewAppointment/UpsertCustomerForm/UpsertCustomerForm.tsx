@@ -17,7 +17,6 @@ const UpsertCustomerForm: FC = () => {
       <Grid item xs={12} sm={3}>
         <TextField
           label={intl.formatMessage({
-            id: 'general.firstName',
             defaultMessage: 'First name',
           })}
           error={Boolean(errors.client?.firstName)}
@@ -35,7 +34,6 @@ const UpsertCustomerForm: FC = () => {
       <Grid item xs={12} sm={3}>
         <TextField
           label={intl.formatMessage({
-            id: 'general.lastName',
             defaultMessage: 'Last name',
           })}
           error={Boolean(errors.client?.lastName)}
@@ -53,7 +51,6 @@ const UpsertCustomerForm: FC = () => {
       <Grid item xs={12} sm={6}>
         <TextField
           label={intl.formatMessage({
-            id: 'general.email',
             defaultMessage: 'Email',
           })}
           error={Boolean(errors.client?.email)}
@@ -69,7 +66,6 @@ const UpsertCustomerForm: FC = () => {
       <Grid item xs={12} sm={2}>
         <TextField
           label={intl.formatMessage({
-            id: 'general.phoneCountryPrefix',
             defaultMessage: 'Country prefix',
           })}
           error={Boolean(errors.client?.phoneCountryPrefix)}
@@ -85,7 +81,6 @@ const UpsertCustomerForm: FC = () => {
       <Grid item xs={12} sm={4}>
         <TextField
           label={intl.formatMessage({
-            id: 'general.phone',
             defaultMessage: 'Phone',
           })}
           error={Boolean(errors.client?.phone)}

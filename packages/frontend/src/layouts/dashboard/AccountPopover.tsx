@@ -17,7 +17,6 @@ import {
   IconButton,
 } from '@mui/material';
 import MenuPopover from '../../components/MenuPopover';
-import account from '../../_mock/account';
 import AuthenticationService from '../../services/AuthenticationService';
 import { useCurrentUserContext } from './CurrentUserContext';
 import { useQueryClient } from 'react-query';
@@ -70,7 +69,10 @@ const AccountPopover: FunctionComponent = () => {
             : {}),
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar
+          src="/static/mock-images/avatars/avatar_default.jpg"
+          alt="photoURL"
+        />
       </IconButton>
 
       <MenuPopover

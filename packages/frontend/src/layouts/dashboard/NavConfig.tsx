@@ -10,7 +10,6 @@ const getIcon = (name: IconifyIcon | string) => (
 const navConfig = [
   {
     title: intl.formatMessage({
-      id: 'NavConfig.Appointments',
       defaultMessage: 'Appointments',
     }),
     path: '/app/appointment',

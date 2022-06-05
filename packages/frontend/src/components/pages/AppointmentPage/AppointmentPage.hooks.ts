@@ -61,7 +61,6 @@ export const useAppointmentPage = () => {
     if (isFailureResponse(response)) {
       throw new Error(
         intl.formatMessage({
-          id: 'general.internalError',
           defaultMessage: 'Got an internal error',
         }),
       );
