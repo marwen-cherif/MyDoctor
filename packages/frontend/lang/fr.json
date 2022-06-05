@@ -1,90 +1,13 @@
-[
-    {
-        "term": "2mRLis",
-        "definition": "Rechercher un client",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "47FYwb",
-        "definition": "Annuler",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "GDeZCO",
-        "definition": "Cr\u00e9er un nouveau rendez-vous",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "HcSuIf",
-        "definition": "Pr\u00e9fix du pays",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "LwgKgu",
-        "definition": "Rendez-vous",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "N2IrpM",
-        "definition": "Confirmer",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "O95R3Z",
-        "definition": "T\u00e9l\u00e9phoner",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "VDgfLx",
-        "definition": "Nouveau client",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "pONqz8",
-        "definition": "Pr\u00e9nom",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "sy+pv5",
-        "definition": "E-mail",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "txUL0F",
-        "definition": "Nom de famille",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    }
-]
+{
+    "2mRLis": "Rechercher un client",
+    "47FYwb": "Annuler",
+    "GDeZCO": "Créer un nouveau rendez-vous",
+    "HcSuIf": "Préfix du pays",
+    "LwgKgu": "Rendez-vous",
+    "N2IrpM": "Confirmer",
+    "O95R3Z": "Téléphoner",
+    "VDgfLx": "Nouveau client",
+    "pONqz8": "Prénom",
+    "sy+pv5": "E-mail",
+    "txUL0F": "Nom de famille"
+}
