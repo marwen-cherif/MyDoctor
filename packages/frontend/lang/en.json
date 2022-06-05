@@ -1,90 +1,13 @@
-[
-    {
-        "term": "2mRLis",
-        "definition": "Search Customer",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "47FYwb",
-        "definition": "Cancel",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "GDeZCO",
-        "definition": "Create a new appointment",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "HcSuIf",
-        "definition": "Country prefix",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "LwgKgu",
-        "definition": "Appointments",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "N2IrpM",
-        "definition": "Confirm",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "O95R3Z",
-        "definition": "Phone",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "VDgfLx",
-        "definition": "New Customer",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "pONqz8",
-        "definition": "First name",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "sy+pv5",
-        "definition": "Email",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    },
-    {
-        "term": "txUL0F",
-        "definition": "Last name",
-        "context": "",
-        "term_plural": "",
-        "reference": "",
-        "comment": ""
-    }
-]
+{
+  "2mRLis": "Search Customer",
+  "47FYwb": "Cancel",
+  "GDeZCO": "Create a new appointment",
+  "HcSuIf": "Country prefix",
+  "LwgKgu": "Appointments",
+  "N2IrpM": "Confirm",
+  "O95R3Z": "Phone",
+  "VDgfLx": "New Customer",
+  "pONqz8": "First name",
+  "sy+pv5": "Email",
+  "txUL0F": "Last name"
+}
