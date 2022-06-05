@@ -68,7 +68,6 @@ const CreateNewAppointment: FC<
           {
             value: NEW_CUSTOMER,
             label: intl.formatMessage({
-              id: 'general.CreateNewCustomer',
               defaultMessage: 'New Customer',
             }),
           },
@@ -92,10 +91,7 @@ const CreateNewAppointment: FC<
       <form onSubmit={handleSubmit(handleCreateNewAppointment)}>
         <div style={{ padding: '1rem' }}>
           <Typography component="div" variant="subtitle1" gutterBottom>
-            <FormattedMessage
-              id="CreateNewAppointment.title"
-              defaultMessage="Create a new appointment"
-            />
+            <FormattedMessage defaultMessage="Create a new appointment" />
           </Typography>
 
           <Grid container spacing={3}>
@@ -107,7 +103,6 @@ const CreateNewAppointment: FC<
                   return (
                     <Autocomplete
                       label={intl.formatMessage({
-                        id: 'createNewAppointment.searchCustomerLabel',
                         defaultMessage: 'Search Customer',
                       })}
                       name={name}
@@ -175,16 +170,10 @@ const CreateNewAppointment: FC<
 
         <DialogActions>
           <Button onClick={scheduler.close}>
-            <FormattedMessage
-              id="General.cancelButton"
-              defaultMessage="Cancel"
-            />
+            <FormattedMessage defaultMessage="Cancel" />
           </Button>
           <Button variant="contained" type="submit">
-            <FormattedMessage
-              id="General.confirmButton"
-              defaultMessage="Confirm"
-            />
+            <FormattedMessage defaultMessage="Confirm" />
           </Button>
         </DialogActions>
       </form>

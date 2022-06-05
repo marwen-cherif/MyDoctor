@@ -2,7 +2,6 @@ import { FunctionComponent, useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Box, Link, Drawer, Typography, Avatar } from '@mui/material';
-import account from '../../_mock/account';
 import useResponsive, { QueryTypes } from '../../hooks/useResponsive';
 import Logo from '../../components/Logo';
 import Scrollbar from '../../components/Scrollbar';
@@ -62,7 +61,10 @@ const DashboardSidebar: FunctionComponent<{
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar
+              src="/static/mock-images/avatars/avatar_default.jpg"
+              alt="photoURL"
+            />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
                 {`${user.lastName} ${user.firstName}`}

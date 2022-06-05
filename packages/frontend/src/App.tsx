@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import frLocale from 'date-fns/locale/fr';
 
 import ThemeProvider from './theme';
@@ -17,9 +17,12 @@ const queryClient = new QueryClient({
   },
 });
 
-const App: FunctionComponent = () => {
+const App: FC<{
+  locale: string;
+  messages: Record<string, any>;
+}> = ({ locale, messages }) => {
   return (
-    <IntlProvider messages={{}} locale="fr" defaultLocale="en">
+    <IntlProvider messages={messages} locale={locale} defaultLocale="en">
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <LocalizationProvider

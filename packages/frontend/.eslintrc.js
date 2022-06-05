@@ -13,6 +13,7 @@ module.exports = {
     'prettier',
     'react-hooks',
     '@typescript-eslint',
+    'formatjs',
   ],
   env: {
     browser: true,
@@ -111,6 +112,7 @@ module.exports = {
         format: ['PascalCase'],
       },
     ],
+    'formatjs/no-offset': 'error',
   },
   overrides: [
     {

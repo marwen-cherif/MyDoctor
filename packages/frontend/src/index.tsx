@@ -11,13 +11,27 @@ const container = document.getElementById('root');
 
 const root = createRoot(container!);
 
-root.render(
-  <HelmetProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </HelmetProvider>,
-);
+function loadLocaleData(locale: string) {
+  switch (locale) {
+    case 'fr':
+      return import('./compiled-messages/fr.json');
+    default:
+      return import('./compiled-messages/en.json');
+  }
+}
+
+async function bootstrapApplication(locale: string) {
+  const messages = await loadLocaleData(locale);
+
+  root.render(
+    <HelmetProvider>
+      <BrowserRouter>
+        <App locale={locale} messages={messages} />
+      </BrowserRouter>
+    </HelmetProvider>,
+  );
+}
+bootstrapApplication('fr');
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
